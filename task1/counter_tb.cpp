@@ -8,12 +8,13 @@ int main(int argc, char** argv, char** env){
 
     Verilated::commandArgs(argc, argv);
 
-    Vcounter* top = new Vcounter;
+    Vcounter* top = new Vcounter; // instantiate counter.sv module
+    VerilatedVcdC* tfp = new VerilatedVcdC; // "vcd" meaning value change dump. just a file to store waveform data
 
     Verilated::traceEverOn(true);
-    VerilatedVcdC* tfp = new VerilatedVcdC;
-    top->trace (tfp, 99);
-    tfp->open ("counter.vcd");
+
+    top->trace (tfp, 99);   // "top" to reference the top level entity of the hierarchy
+    tfp->open ("counter.vcd");  // "tfp" for trace file pointer
 
     top->clk = 1;
     top->rst = 1;
@@ -22,12 +23,15 @@ int main(int argc, char** argv, char** env){
     for (i=0; i<300; i++){
 
         for (clk=0; clk<2; clk++){
-            tfp->dump (2*i+clk);
-            top->clk = !top->clk;
-            top->eval ();
+            tfp->dump (2*i+clk); // this expression represents simulation time. 
+            top->clk = !top->clk; // toggle value of clk between 0/1
+            top->eval (); // a bit like a sleep() or wait(). it requests the simulation to evaluate all current inputs
         }
+
+        // these 2 lines are the main part of the testing. i.e. they test the reset and enable inputs
         top->rst = (i<2) | (i == 15);
         top->en = (i>4);
+
         if (Verilated::gotFinish()) exit (0);
     }
     tfp->close();
