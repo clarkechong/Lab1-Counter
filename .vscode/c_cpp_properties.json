@@ -1,0 +1,18 @@
+{
+    "configurations": [
+      {
+        "name": "WSL",
+        "includePath": [
+          "${workspaceFolder}/**",
+          "/usr/local/share/verilator/include/"
+        ],
+        "defines": [],
+        "compilerPath": "/usr/bin/g++",               // Ensure this points to your GCC installation
+        "cStandard": "c11",
+        "cppStandard": "c++11",
+        "intelliSenseMode": "linux-gcc-x64"
+      }
+    ],
+    "version": 4
+  }
+  

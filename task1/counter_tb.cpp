@@ -1,6 +1,6 @@
 #include "Vcounter.h"
 #include "verilated.h"
-#include "verlated_vcd_c.h"
+#include "verilated_vcd_c.h"
 
 int main(int argc, char** argv, char** env){
     int i;
