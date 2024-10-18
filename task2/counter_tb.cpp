@@ -1,6 +1,7 @@
 #include "./obj_dir/Vcounter.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
+#include "vbuddy.cpp"
 
 int main(int argc, char** argv, char** env){
     int i;
@@ -19,6 +20,11 @@ int main(int argc, char** argv, char** env){
     top->clk = 1;
     top->rst = 1;
     top->en = 0;
+
+    // init Vbuddy
+    if (vbdOpen()!=1){
+        return (-1);
+    }
 
     for (i=0; i<300; i++){
 
@@ -47,6 +53,7 @@ int main(int argc, char** argv, char** env){
 
         if (Verilated::gotFinish()) exit (0);
     }
+    vbdClose();
     tfp->close();
     exit(0);
 
