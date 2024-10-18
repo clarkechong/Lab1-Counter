@@ -1,7 +1,7 @@
 #include "./obj_dir/Vcounter.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "vbuddy.cpp"
+#include "../vbuddy.cpp"
 
 int main(int argc, char** argv, char** env){
     int i;

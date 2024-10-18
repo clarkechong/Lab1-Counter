@@ -1023,9 +1023,9 @@ int vbdOpen() {
   char port_name[80];       // max 80 characters
 
   // read port name from vbuddy.cfg
-  FILE* input_file = fopen("vbuddy.cfg", "r");
+  FILE* input_file = fopen("../vbuddy.cfg", "r");
     if (input_file == nullptr) 
-        perror("Cannot find vbuddy.cfg\n");
+        perror("Cannot find vbuddy.cfg because you suck dick\n");
     else {
         fgets(port_name, 80, input_file);
     }  
