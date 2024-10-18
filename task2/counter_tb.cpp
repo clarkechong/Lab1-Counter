@@ -25,6 +25,7 @@ int main(int argc, char** argv, char** env){
     if (vbdOpen()!=1){
         return (-1);
     }
+    vbdHeader("Lab 1: Counter");
 
     for (i=0; i<300; i++){
 
@@ -38,18 +39,11 @@ int main(int argc, char** argv, char** env){
         top->rst = (i<2) | (i == 30);
         top->en = (i>4);
 
-        if(top->count == 0x9){
-            top->en = 0;
-            int j = i;
-            for (i+=1; i < j+3; i++){ // increment i so that not dumping duplicate value of i
-                for(clk=0; clk<2; clk++){
-                    tfp->dump (2*i+clk);
-                    top->clk = !top->clk;
-                    top->eval();
-                }
-            }
-            top->en = 1;
-        }
+        vbdHex(4, (int(top->count) >> 16) & 0xF);
+        vbdHex(3, (int(top->count) >> 8) & 0xF);
+        vbdHex(2, (int(top->count) >> 4) & 0xF);
+        vbdHex(1, int(top->count) & 0xF);
+        vbdCycle(i+1);
 
         if (Verilated::gotFinish()) exit (0);
     }
