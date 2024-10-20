@@ -27,7 +27,7 @@ int main(int argc, char** argv, char** env){
     }
     vbdHeader("Lab 1: Counter");
 
-    for (i=0; i<300; i++){
+    for (i=0; i<1000; i++){
 
         for (clk=0; clk<2; clk++){
             tfp->dump (2*i+clk); // this expression represents simulation time. dump() records all the values at this timestamp
@@ -36,13 +36,16 @@ int main(int argc, char** argv, char** env){
         }
 
         // these 2 lines are the main part of the testing. i.e. they test the reset and enable inputs
-        top->rst = (i<2) | (i == 30);
-        top->en = (i>4);
+        top->rst = (i<2) | (i % 80 == 0);
+        top->en = vbdFlag();
 
-        vbdHex(4, (int(top->count) >> 16) & 0xF);
-        vbdHex(3, (int(top->count) >> 8) & 0xF);
-        vbdHex(2, (int(top->count) >> 4) & 0xF);
-        vbdHex(1, int(top->count) & 0xF);
+        // vbdHex(4, (int(top->count) >> 16) & 0xF);
+        // vbdHex(3, (int(top->count) >> 8) & 0xF);
+        // vbdHex(2, (int(top->count) >> 4) & 0xF);
+        // vbdHex(1, int(top->count) & 0xF);
+        
+        vbdPlot(int(top->count), 0, 255);
+
         vbdCycle(i+1);
 
         if (Verilated::gotFinish()) exit (0);
