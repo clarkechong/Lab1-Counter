@@ -11,7 +11,6 @@ VL_ATTR_COLD void Vcounter___024root___eval_initial(Vcounter___024root* vlSelf) 
     Vcounter__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vcounter___024root___eval_initial\n"); );
     // Body
-    vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
     vlSelf->__Vclklast__TOP__ld = vlSelf->ld;
 }
 
@@ -35,6 +34,5 @@ VL_ATTR_COLD void Vcounter___024root___ctor_var_reset(Vcounter___024root* vlSelf
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->ld = VL_RAND_RESET_I(1);
-    vlSelf->v = VL_RAND_RESET_I(8);
     vlSelf->count = VL_RAND_RESET_I(8);
 }

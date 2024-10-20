@@ -19,7 +19,7 @@ int main(int argc, char** argv, char** env){
 
     top->clk = 1;
     top->rst = 0;
-    top->v = 0xAA;
+    // top->v = 0xAA;
 
     // init Vbuddy
     if (vbdOpen()!=1){
