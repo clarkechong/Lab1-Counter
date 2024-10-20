@@ -11,6 +11,7 @@ module counter #(
 //always_ff @(posedge clk)                  // synchronous reset
 always_ff @(posedge clk or posedge rst)     // async reset
     if (rst) count <= {WIDTH{1'b0}};
-    else count <= count + {{WIDTH-1{1'b0}}, en};
+    else if (en) count <= count + {{WIDTH-1{1'b0}}, en};
+    else if (!en) count <= count + {{WIDTH-1{1'b1}}, en}; // decrease count via two's complement
 
 endmodule

@@ -36,14 +36,14 @@ int main(int argc, char** argv, char** env){
         }
 
         // these 2 lines are the main part of the testing. i.e. they test the reset and enable inputs
-        top->rst = (i<2) | (i % 80 == 0);
+        top->rst = (i<2);
         top->en = vbdFlag();
 
         // vbdHex(4, (int(top->count) >> 16) & 0xF);
         // vbdHex(3, (int(top->count) >> 8) & 0xF);
         // vbdHex(2, (int(top->count) >> 4) & 0xF);
         // vbdHex(1, int(top->count) & 0xF);
-        
+
         vbdPlot(int(top->count), 0, 255);
 
         vbdCycle(i+1);
